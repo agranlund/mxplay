@@ -626,7 +626,7 @@ BOOL AudioPluginLockResources( void )
 			ShowFastCpuRequiredDialog();
 		}
 
-		if( dmaLocked )
+		if( AudioPluginIsFlagSet( MXP_FLG_USE_DMA ) && dmaLocked )
 		{
 			extern void asm_save_audio( void );
 			Supexec( asm_save_audio );
