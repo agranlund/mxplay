@@ -39,6 +39,7 @@
 #include "playlist.h"
 #include "plugin_info.h"
 #include "timer.h"
+#include "system.h"
 #include "module_info.h"
 
 int				g_timeMode = TIME_MODE_ADD;
@@ -97,6 +98,11 @@ static void PanelVolumeSet( short mode, short volume )
 	volume &= ( VOLUME_STAGES - 1 );
 	volume = VOLUME_MAX - volume;
 
+	if( g_hasGsxb )
+	{
+		mode += 12;
+	}
+
 	Soundcmd( mode, volume << 4 );
 }
 
@@ -106,6 +112,11 @@ static void PanelVolumeSet( short mode, short volume )
 static short PanelVolumeGet( short mode )
 {
 	short att;
+
+	if( g_hasGsxb )
+	{
+		mode += 12;
+	}
 
 	att = (short)Soundcmd( mode, -1 );	/* SND_INQUIRE */
 

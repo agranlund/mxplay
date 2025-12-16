@@ -33,6 +33,8 @@ BOOL  g_fastCpu = FALSE;
 BOOL g_tosClone = FALSE;
 BOOL   g_hasDma = FALSE;
 BOOL   g_hasDsp = FALSE;
+BOOL   g_hasExt = FALSE;
+BOOL  g_hasGsxb = FALSE;
 int		  g_cpu = 0;
 
 void CheckSystem( void )
@@ -81,6 +83,17 @@ void CheckSystem( void )
 		{
 			debug( "DSP" );
 			g_hasDsp = TRUE;
+		}
+		if( ( val & SND_EXT ) != 0 )	/* Extended Xbios routines */
+		{
+			debug( "EXT" );
+			g_hasExt = TRUE;
+
+			if( Getcookie( 'GSXB', &val ) == C_FOUND )
+			{
+				debug( "GSXB" );
+				g_hasGsxb = TRUE;
+			}
 		}
 	}
 
