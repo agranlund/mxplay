@@ -20,7 +20,7 @@ MAKE			= make
 DEBUG_FLAGS		= -g -DDEBUG -Wextra -Wno-sign-compare
 OPT_FLAGS		= -O2 -fomit-frame-pointer -g
 CFLAGS			= -Wall $(CPU_FLAGS) -Wno-multichar -std=c99 -D_BSD_SOURCE
-ASFLAGS			= $(CPU_FLAGS)
+ASFLAGS			= $(CPU_FLAGS_ASM)
 
 SOBJS			= dsp_fix.S asm_routines.S
 COBJS			= main.c audio_plugins.c dialogs.c panel.c filelist.c misc.c av.c \
@@ -30,7 +30,8 @@ COBJS			= main.c audio_plugins.c dialogs.c panel.c filelist.c misc.c av.c \
 OBJS			= $(COBJS:.c=.o) $(SOBJS:.S=.o)
 
 LIBS			= -lcflib -lgem -lm #-Wl,--traditional-format
-CPU_FLAGS		= -m68020-60		# use 020+ and FPU code
+CPU_FLAGS		= -m68000
+CPU_FLAGS_ASM	= -m68020-60
 
 ifeq ($(CONFIG),Release)
  CFLAGS += $(OPT_FLAGS)

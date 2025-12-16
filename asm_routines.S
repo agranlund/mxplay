@@ -88,7 +88,11 @@ _asm_invalidate_cache:
 	cmpi.l	#40,_g_cpu
 	bge.b	.cpu040
 
-.cpu030:movec	cacr,d0
+	cmpi.l  #20,_g_cpu
+	bge.b   .cpu020
+	rts
+
+.cpu020:movec	cacr,d0
 	or.l	#0b100000001000,d0		// cd/ci bit (clear d/i-cache)
 	movec	d0,cacr
 	rts
